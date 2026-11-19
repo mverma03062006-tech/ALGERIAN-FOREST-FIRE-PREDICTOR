@@ -2,9 +2,11 @@
 
 A Machine Learning-based web application that predicts the **Fire Weather Index (FWI)** using the Algerian Forest Fires Dataset. The project covers the complete Machine Learning workflow, from Exploratory Data Analysis and Feature Engineering to Model Training and Flask-based Deployment.
 
+---
+
 ## 🌐 Live Demo
 
-🚀 **[Try the Live Application](https://algerian-forest-fire-prediction-33yc.onrender.com)**
+🚀 **[Try the Live Application](https://algerian-forest-fire-predictor-1.onrender.com/)**
 
 ## 📌 Project Overview
 
@@ -12,7 +14,7 @@ Forest fires are a major environmental concern, causing significant damage to ec
 
 This project uses Machine Learning to predict the **Fire Weather Index (FWI)** based on meteorological and environmental conditions.
 
-A **Ridge Regression** model is trained on the Algerian Forest Fires Dataset, with StandardScaler used for feature scaling. The trained model is integrated into a Flask web application to provide real-time predictions through a user-friendly interface.
+A **Ridge Regression** model is trained on the Algerian Forest Fires Dataset, with StandardScaler used for feature scaling. The trained model is integrated into a Flask web application to provide predictions through a user-friendly interface.
 
 ## 🚀 Features
 
@@ -168,9 +170,9 @@ The project uses **Ridge Regression**, a regularized linear regression algorithm
 
 Explore the deployed application:
 
-👉 [Algerian Forest Fire Prediction – Live Demo](https://algerian-forest-fire-prediction-33yc.onrender.com)
+👉 **[Algerian Forest Fire Prediction – Live Demo](https://algerian-forest-fire-predictor-1.onrender.com/)**
 
-*Add screenshots of the application interface here.*
+*Add screenshots of the Flask application interface here.*
 
 ## 🔮 Future Improvements
 
