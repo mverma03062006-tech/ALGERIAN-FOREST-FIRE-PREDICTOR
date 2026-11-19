@@ -1,78 +1,71 @@
 # 🔥 Algerian Forest Fire Prediction
 
-A Machine Learning web application that predicts the **Fire Weather Index (FWI)** using the Algerian Forest Fires dataset. The project includes Exploratory Data Analysis (EDA), Feature Engineering, Model Training, and deployment using Flask.
+A Machine Learning-based web application that predicts the **Fire Weather Index (FWI)** using the Algerian Forest Fires Dataset. The project covers the complete Machine Learning workflow, from Exploratory Data Analysis and Feature Engineering to Model Training and Flask-based Deployment.
 
----
 ## 🌐 Live Demo
 
-The application is deployed on Render:
-
-**[Algerian Forest Fire Prediction – Live Application](https://algerian-forest-fire-prediction-33yc.onrender.com)**
-
+🚀 **[Try the Live Application](https://algerian-forest-fire-prediction-33yc.onrender.com)**
 
 ## 📌 Project Overview
 
-This project predicts the **Fire Weather Index (FWI)** based on weather and environmental conditions using a trained **Ridge Regression** model.
+Forest fires are a major environmental concern, causing significant damage to ecosystems and biodiversity.
 
-The workflow includes:
+This project uses Machine Learning to predict the **Fire Weather Index (FWI)** based on meteorological and environmental conditions.
 
-- Exploratory Data Analysis (EDA)
-- Feature Engineering
-- Data Preprocessing
-- Model Training
-- Model Serialization using Pickle
-- Flask Web Application for Prediction
-
----
+A **Ridge Regression** model is trained on the Algerian Forest Fires Dataset, with StandardScaler used for feature scaling. The trained model is integrated into a Flask web application to provide real-time predictions through a user-friendly interface.
 
 ## 🚀 Features
 
-- Predict Fire Weather Index (FWI)
-- User-friendly Flask web interface
-- Ridge Regression model
-- StandardScaler preprocessing
-- Trained model loaded using Pickle
-
----
+- 🔥 Predicts Fire Weather Index (FWI).
+- 🤖 Machine Learning model using Ridge Regression.
+- 📊 Exploratory Data Analysis (EDA).
+- ⚙️ Feature Engineering and Data Preprocessing.
+- 📏 Feature Scaling using StandardScaler.
+- 🌐 Interactive Flask-based web interface.
+- 💾 Model serialization using Pickle.
+- ☁️ Live deployment using Render.
 
 ## 📊 Dataset
 
-The project uses the **Algerian Forest Fires Dataset** containing meteorological and fire-related attributes.
+The project uses the **Algerian Forest Fires Dataset**, which contains meteorological observations and fire-related information collected from two regions of Algeria.
 
 ### Input Features
 
-- Temperature
-- Relative Humidity (RH)
-- Wind Speed (Ws)
-- Rain
-- FFMC
-- DMC
-- ISI
-- Classes
-- Region
+| Feature | Description |
+|---|---|
+| Temperature | Temperature in Celsius |
+| RH | Relative Humidity (%) |
+| Ws | Wind Speed (km/h) |
+| Rain | Rainfall (mm) |
+| FFMC | Fine Fuel Moisture Code |
+| DMC | Duff Moisture Code |
+| ISI | Initial Spread Index |
+| Classes | Fire / Not Fire classification |
+| Region | Geographic region |
 
-### Output
+### Prediction Output
 
-- Fire Weather Index (FWI)
-
----
+**Fire Weather Index (FWI)** – An indicator used to estimate the potential intensity of forest fires.
 
 ## 🛠️ Technologies Used
 
-- Python
-- Flask
-- Scikit-learn
-- Pandas
-- NumPy
-- Pickle
-- HTML
-
----
+| Technology | Purpose |
+|---|---|
+| Python | Programming Language |
+| Flask | Web Application Framework |
+| Scikit-learn | Machine Learning |
+| Pandas | Data Manipulation |
+| NumPy | Numerical Computing |
+| Matplotlib & Seaborn | Data Visualization |
+| Pickle | Model Serialization |
+| HTML & CSS | Frontend Development |
+| Render | Cloud Deployment |
+| Jupyter Notebook | Model Development |
 
 ## 📂 Project Structure
 
 ```text
-Algerian-Forest-Fire-Prediction
+ALGERIAN-FOREST-FIRE-PREDICTOR/
 │
 ├── models/
 │   ├── ridge.pkl
@@ -88,70 +81,115 @@ Algerian-Forest-Fire-Prediction
 │   └── index.html
 │
 ├── application.py
+├── requirements.txt
 ├── README.md
 └── .gitignore
 ```
 
----
+## ⚙️ Installation and Setup
 
-## ▶️ How to Run
+Follow these steps to run the project locally.
 
-Clone the repository
-
-```bash
-git clone https://github.com/Piyush700gitt/Algerian-Forest-Fire-Prediction.git
-```
-
-Move into the project directory
+### 1. Clone the Repository
 
 ```bash
-cd Algerian-Forest-Fire-Prediction
+git clone https://github.com/mverma03062006-tech/ALGERIAN-FOREST-FIRE-PREDICTOR.git
 ```
 
-Install the required libraries
+### 2. Navigate to the Project Directory
+
+```bash
+cd ALGERIAN-FOREST-FIRE-PREDICTOR
+```
+
+### 3. Create a Virtual Environment (Recommended)
+
+```bash
+python -m venv venv
+```
+
+Activate it:
+
+**Windows:**
+```bash
+venv\Scripts\activate
+```
+
+**Linux / macOS:**
+```bash
+source venv/bin/activate
+```
+
+### 4. Install Dependencies
 
 ```bash
 pip install -r requirements.txt
 ```
 
-Run the Flask application
+### 5. Run the Flask Application
 
 ```bash
 python application.py
 ```
 
-Open your browser and visit:
+### 6. Open in Browser
 
-```
+Visit:
+
+```text
 http://127.0.0.1:5000
 ```
 
----
-
 ## 🤖 Machine Learning Model
 
-- Ridge Regression
-- StandardScaler for feature scaling
+The project uses **Ridge Regression**, a regularized linear regression algorithm.
 
----
+### Model Workflow
+
+1. Load and understand the Algerian Forest Fires Dataset.
+2. Perform Exploratory Data Analysis.
+3. Clean and preprocess the dataset.
+4. Perform Feature Engineering.
+5. Split the dataset into training and testing sets.
+6. Apply StandardScaler for feature scaling.
+7. Train the Ridge Regression model.
+8. Serialize the trained model and scaler using Pickle.
+9. Integrate the model into the Flask application.
+10. Generate predictions through the web interface.
+
+### Model Components
+
+- **Algorithm:** Ridge Regression
+- **Regularization:** L2 Regularization
+- **Feature Scaling:** StandardScaler
+- **Model Storage:** Pickle
 
 ## 📸 Application Preview
 
-(Add a screenshot of your Flask application here.)
+Explore the deployed application:
 
----
+👉 [Algerian Forest Fire Prediction – Live Demo](https://algerian-forest-fire-prediction-33yc.onrender.com)
 
-## 📈 Future Improvements
+*Add screenshots of the application interface here.*
 
-- Improve the UI using Bootstrap
-- Deploy on Render
-- Add model evaluation metrics on the web page
-- Add input validation
+## 🔮 Future Improvements
 
----
+- Improve the frontend with Bootstrap.
+- Display model evaluation metrics.
+- Add input validation and error handling.
+- Compare multiple regression algorithms.
+- Improve prediction accuracy through hyperparameter tuning.
+- Enhance the user experience and application responsiveness.
 
 ## 👨‍💻 Author
 
-**Piyush Shrivastava**
+**Mayur**
 
-GitHub: https://github.com/Piyush700gitt
+- GitHub: [@mverma03062006-tech](https://github.com/mverma03062006-tech)
+- Project Repository: [ALGERIAN-FOREST-FIRE-PREDICTOR](https://github.com/mverma03062006-tech/ALGERIAN-FOREST-FIRE-PREDICTOR)
+
+---
+
+⭐ If you find this project interesting, consider giving the repository a star!
+
+**Built with Python, Machine Learning and Flask.**
