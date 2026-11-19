@@ -1,0 +1,467 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>TerraWatch | Wildfire Intelligence</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --bg: #101713;
+            --surface: #19231d;
+            --surface-light: #202d25;
+            --border: #344239;
+            --text: #f0f3ed;
+            --muted: #a0aea3;
+            --accent: #e6a23c;
+            --accent-light: #ffc66b;
+            --green: #8fae82;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'DM Sans', sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            min-height: 100vh;
+            overflow-x: hidden;
+            background-image:
+                radial-gradient(ellipse at 80% 20%, rgba(94, 130, 89, 0.15), transparent 40%),
+                radial-gradient(ellipse at 10% 90%, rgba(230, 162, 60, 0.07), transparent 35%);
+        }
+
+        /* Navigation */
+
+        .navbar {
+            max-width: 1200px;
+            margin: auto;
+            padding: 27px 25px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .logo {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 21px;
+            font-weight: 700;
+            letter-spacing: -0.8px;
+        }
+
+        .logo span {
+            color: var(--accent);
+        }
+
+        .nav-right {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .nav-label {
+            font-size: 11px;
+            letter-spacing: 1.5px;
+            color: var(--green);
+        }
+
+        .system-status {
+            padding: 8px 13px;
+            border: 1px solid #50664d;
+            border-radius: 30px;
+            font-size: 10px;
+            letter-spacing: 1px;
+            color: var(--green);
+        }
+
+        /* Main hero */
+
+        .main {
+            max-width: 1200px;
+            margin: auto;
+            padding: 85px 25px 60px;
+            display: grid;
+            grid-template-columns: 1.15fr 0.85fr;
+            align-items: center;
+            gap: 65px;
+        }
+
+        .eyebrow {
+            color: var(--accent);
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 3px;
+            margin-bottom: 23px;
+        }
+
+        h1 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: clamp(43px, 6vw, 67px);
+            line-height: 1.08;
+            letter-spacing: -2.5px;
+            margin-bottom: 23px;
+        }
+
+        h1 span {
+            color: var(--accent);
+        }
+
+        .description {
+            max-width: 560px;
+            font-size: 15px;
+            color: var(--muted);
+            line-height: 1.9;
+            margin-bottom: 32px;
+        }
+
+        /* Button */
+
+        .start-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 20px;
+            padding: 16px 23px;
+            background: var(--accent);
+            color: #1b2119;
+            text-decoration: none;
+            font-weight: 800;
+            font-size: 13px;
+            border-radius: 7px;
+            transition: 0.25s ease;
+        }
+
+        .start-btn:hover {
+            background: var(--accent-light);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(230, 162, 60, 0.17);
+        }
+
+        .arrow {
+            font-size: 19px;
+        }
+
+        .note {
+            margin-top: 20px;
+            color: #829187;
+            font-size: 11px;
+        }
+
+        /* Right visual panel */
+
+        .visual-panel {
+            position: relative;
+            min-height: 390px;
+            padding: 27px;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 15px;
+            overflow: hidden;
+        }
+
+        .visual-panel::before {
+            content: "";
+            position: absolute;
+            width: 260px;
+            height: 260px;
+            border: 1px solid rgba(143, 174, 130, 0.14);
+            border-radius: 50%;
+            top: 60px;
+            left: 50%;
+            transform: translateX(-50%);
+            box-shadow:
+                0 0 0 35px rgba(143, 174, 130, 0.025),
+                0 0 0 70px rgba(143, 174, 130, 0.02);
+        }
+
+        .panel-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: relative;
+            z-index: 2;
+        }
+
+        .panel-top h3 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 15px;
+        }
+
+        .panel-top span {
+            color: var(--green);
+            font-size: 10px;
+            letter-spacing: 1px;
+        }
+
+        .forest-icon {
+            position: relative;
+            z-index: 1;
+            height: 235px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 105px;
+            filter: drop-shadow(0 15px 15px rgba(0,0,0,0.3));
+        }
+
+        .visual-footer {
+            position: relative;
+            z-index: 2;
+            padding-top: 18px;
+            border-top: 1px solid var(--border);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .visual-footer p {
+            color: var(--muted);
+            font-size: 11px;
+        }
+
+        .visual-footer strong {
+            color: var(--accent);
+            font-size: 12px;
+        }
+
+        /* Feature section */
+
+        .features-section {
+            max-width: 1200px;
+            margin: auto;
+            padding: 20px 25px 75px;
+        }
+
+        .section-heading {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 19px;
+            margin-bottom: 22px;
+        }
+
+        .features {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 18px;
+        }
+
+        .feature {
+            padding: 23px;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 11px;
+            transition: 0.25s ease;
+        }
+
+        .feature:hover {
+            transform: translateY(-4px);
+            border-color: #667b52;
+        }
+
+        .feature-icon {
+            font-size: 23px;
+            margin-bottom: 15px;
+        }
+
+        .feature h3 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 15px;
+            margin-bottom: 9px;
+        }
+
+        .feature p {
+            color: var(--muted);
+            font-size: 12px;
+            line-height: 1.8;
+        }
+
+        /* Footer */
+
+        footer {
+            max-width: 1200px;
+            margin: auto;
+            padding: 23px 25px;
+            border-top: 1px solid var(--border);
+            display: flex;
+            justify-content: space-between;
+            gap: 15px;
+            color: var(--muted);
+            font-size: 11px;
+        }
+
+        footer strong {
+            color: var(--green);
+        }
+
+        /* Responsive */
+
+        @media(max-width: 850px) {
+            .main {
+                grid-template-columns: 1fr;
+                gap: 45px;
+                padding-top: 60px;
+            }
+
+            .visual-panel {
+                min-height: 350px;
+            }
+        }
+
+        @media(max-width: 600px) {
+            .navbar {
+                padding: 20px;
+            }
+
+            .nav-label {
+                display: none;
+            }
+
+            .main {
+                padding: 55px 20px 45px;
+            }
+
+            h1 {
+                font-size: 43px;
+                letter-spacing: -1.5px;
+            }
+
+            .features-section {
+                padding: 15px 20px 50px;
+            }
+
+            .features {
+                grid-template-columns: 1fr;
+            }
+
+            .visual-panel {
+                min-height: 320px;
+            }
+
+            footer {
+                flex-direction: column;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <nav class="navbar">
+        <div class="logo">TERRA<span>WATCH.</span></div>
+
+        <div class="nav-right">
+            <div class="nav-label">ENVIRONMENTAL INTELLIGENCE</div>
+            <div class="system-status">● SYSTEM ONLINE</div>
+        </div>
+    </nav>
+
+    <main class="main">
+
+        <section class="hero-content">
+
+            <div class="eyebrow">
+                WILDFIRE MONITORING / INTELLIGENCE SYSTEM
+            </div>
+
+            <h1>
+                Predict the risk.<br>
+                <span>Protect the wild.</span>
+            </h1>
+
+            <p class="description">
+                Explore the power of machine learning in environmental
+                analysis. TerraWatch estimates the Fire Weather Index
+                using meteorological conditions and fire weather indicators
+                to support informed environmental risk assessment.
+            </p>
+
+            <a href="{{ url_for('predict_datapoint') }}" class="start-btn">
+                Explore Prediction
+                <span class="arrow">→</span>
+            </a>
+
+            <p class="note">
+                Powered by Python · Flask · Ridge Regression · Scikit-learn
+            </p>
+
+        </section>
+
+        <section class="visual-panel">
+
+            <div class="panel-top">
+                <h3>Forest Intelligence</h3>
+                <span>FWI ANALYSIS</span>
+            </div>
+
+            <div class="forest-icon">
+                🌲
+            </div>
+
+            <div class="visual-footer">
+                <div>
+                    <p>Prediction engine</p>
+                    <strong>Machine Learning</strong>
+                </div>
+
+                <div>
+                    <p>Analysis type</p>
+                    <strong>Fire Weather Index</strong>
+                </div>
+            </div>
+
+        </section>
+
+    </main>
+
+    <section class="features-section">
+
+        <h2 class="section-heading">What powers TerraWatch?</h2>
+
+        <div class="features">
+
+            <div class="feature">
+                <div class="feature-icon">🌡️</div>
+                <h3>Weather Intelligence</h3>
+                <p>
+                    Analyze temperature, humidity, rainfall and wind
+                    conditions as part of fire weather assessment.
+                </p>
+            </div>
+
+            <div class="feature">
+                <div class="feature-icon">🧠</div>
+                <h3>Machine Learning</h3>
+                <p>
+                    Apply a trained Ridge Regression model to estimate
+                    the Fire Weather Index from environmental inputs.
+                </p>
+            </div>
+
+            <div class="feature">
+                <div class="feature-icon">📊</div>
+                <h3>Instant Prediction</h3>
+                <p>
+                    Submit environmental parameters and receive
+                    a numerical FWI prediction through the application.
+                </p>
+            </div>
+
+        </div>
+
+    </section>
+
+    <footer>
+        <div>© 2026 <strong>TERRAWATCH</strong> · Environmental Intelligence</div>
+        <div>Built with Python, Flask & Scikit-learn</div>
+    </footer>
+
+</body>
+</html>

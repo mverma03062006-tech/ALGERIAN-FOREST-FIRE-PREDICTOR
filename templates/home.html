@@ -1,0 +1,455 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wildfire Intelligence | FWI Predictor</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --bg: #101713;
+            --surface: #19231d;
+            --surface-light: #202d25;
+            --border: #344239;
+            --text: #f0f3ed;
+            --muted: #a0aea3;
+            --accent: #e6a23c;
+            --accent-light: #ffc66b;
+            --green: #8fae82;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'DM Sans', sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            min-height: 100vh;
+            padding: 35px 20px;
+            background-image:
+                radial-gradient(ellipse at 15% 10%, rgba(94, 130, 89, 0.13), transparent 38%),
+                radial-gradient(ellipse at 90% 90%, rgba(230, 162, 60, 0.07), transparent 35%);
+        }
+
+        .container {
+            max-width: 1050px;
+            margin: auto;
+        }
+
+        /* Header */
+
+        .topbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 55px;
+            padding-bottom: 18px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .brand {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 18px;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+        }
+
+        .brand span {
+            color: var(--accent);
+        }
+
+        .status {
+            font-size: 11px;
+            letter-spacing: 1.5px;
+            color: var(--green);
+            border: 1px solid #50664d;
+            padding: 7px 12px;
+            border-radius: 30px;
+        }
+
+        /* Hero */
+
+        .hero {
+            margin-bottom: 35px;
+        }
+
+        .eyebrow {
+            color: var(--accent);
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 3px;
+            margin-bottom: 14px;
+            text-transform: uppercase;
+        }
+
+        .hero h1 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: clamp(34px, 6vw, 55px);
+            line-height: 1.12;
+            letter-spacing: -2px;
+            max-width: 650px;
+            margin-bottom: 15px;
+        }
+
+        .hero h1 span {
+            color: var(--accent);
+        }
+
+        .hero p {
+            max-width: 600px;
+            color: var(--muted);
+            font-size: 14px;
+            line-height: 1.8;
+        }
+
+        /* Main card */
+
+        .prediction-card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            overflow: hidden;
+        }
+
+        .card-header {
+            padding: 25px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid var(--border);
+            gap: 15px;
+        }
+
+        .card-header h2 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 19px;
+        }
+
+        .card-header p {
+            color: var(--muted);
+            font-size: 12px;
+            margin-top: 5px;
+        }
+
+        .step {
+            color: var(--accent);
+            font-size: 11px;
+            letter-spacing: 1.5px;
+            white-space: nowrap;
+        }
+
+        .form-body {
+            padding: 30px;
+        }
+
+        .section-title {
+            color: var(--green);
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 22px;
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 22px;
+            margin-bottom: 35px;
+        }
+
+        .input-group label {
+            display: block;
+            color: #d0d9d0;
+            font-size: 12px;
+            font-weight: 600;
+            margin-bottom: 9px;
+        }
+
+        .input-group input {
+            width: 100%;
+            padding: 13px 14px;
+            background: var(--surface-light);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            outline: none;
+            color: var(--text);
+            font-family: 'DM Sans', sans-serif;
+            font-size: 14px;
+            transition: 0.25s ease;
+        }
+
+        .input-group input:focus {
+            border-color: var(--accent);
+            box-shadow: 0 0 0 3px rgba(230, 162, 60, 0.10);
+        }
+
+        .input-group input::placeholder {
+            color: #718076;
+        }
+
+        /* Submit button */
+
+        .submit-btn {
+            width: 100%;
+            padding: 16px;
+            border: none;
+            border-radius: 8px;
+            background: var(--accent);
+            color: #1b2119;
+            font-family: 'DM Sans', sans-serif;
+            font-size: 14px;
+            font-weight: 800;
+            letter-spacing: 0.4px;
+            cursor: pointer;
+            transition: 0.25s ease;
+        }
+
+        .submit-btn:hover {
+            background: var(--accent-light);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 22px rgba(230, 162, 60, 0.16);
+        }
+
+        /* Prediction result */
+
+        .result {
+            margin: 0 30px 30px;
+            padding: 28px;
+            background: #222e24;
+            border: 1px solid #667b52;
+            border-radius: 12px;
+            text-align: center;
+        }
+
+        .result-label {
+            color: var(--green);
+            font-size: 11px;
+            letter-spacing: 2px;
+            font-weight: 700;
+            text-transform: uppercase;
+        }
+
+        .result h2 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 42px;
+            color: var(--accent-light);
+            margin: 12px 0 5px;
+        }
+
+        .result p {
+            color: var(--muted);
+            font-size: 12px;
+        }
+
+        /* Footer */
+
+        .footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 15px;
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 1px solid var(--border);
+            color: var(--muted);
+            font-size: 11px;
+        }
+
+        .footer strong {
+            color: var(--green);
+        }
+
+        /* Responsive */
+
+        @media (max-width: 750px) {
+            .form-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .topbar {
+                margin-bottom: 40px;
+            }
+        }
+
+        @media (max-width: 500px) {
+            body {
+                padding: 22px 14px;
+            }
+
+            .form-grid {
+                grid-template-columns: 1fr;
+                gap: 17px;
+            }
+
+            .form-body {
+                padding: 22px;
+            }
+
+            .card-header {
+                padding: 20px;
+            }
+
+            .result {
+                margin: 0 20px 20px;
+            }
+
+            .footer {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .hero h1 {
+                letter-spacing: -1px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <header class="topbar">
+        <div class="brand">TERRA<span>WATCH.</span></div>
+        <div class="status">● PREDICTION SYSTEM</div>
+    </header>
+
+    <section class="hero">
+        <div class="eyebrow">Environmental Intelligence / 01</div>
+
+        <h1>Understanding fire risk.<br><span>Before it spreads.</span></h1>
+
+        <p>
+            An intelligent Fire Weather Index prediction interface.
+            Enter atmospheric and environmental measurements to
+            estimate potential fire weather conditions using
+            a machine learning model.
+        </p>
+    </section>
+
+    <main class="prediction-card">
+
+        <div class="card-header">
+            <div>
+                <h2>Environmental Data Input</h2>
+                <p>Provide the nine parameters required for prediction.</p>
+            </div>
+
+            <div class="step">STEP 01 / 01</div>
+        </div>
+
+        <div class="form-body">
+
+            <form action="{{ url_for('predict_datapoint') }}" method="post">
+
+                <div class="section-title">01 — Atmospheric Conditions</div>
+
+                <div class="form-grid">
+
+                    <div class="input-group">
+                        <label>Temperature (°C)</label>
+                        <input type="number" step="any" name="Temperature"
+                            placeholder="e.g. 29.5" required>
+                    </div>
+
+                    <div class="input-group">
+                        <label>Relative Humidity (RH)</label>
+                        <input type="number" step="any" name="RH"
+                            placeholder="e.g. 45" required>
+                    </div>
+
+                    <div class="input-group">
+                        <label>Wind Speed (Ws)</label>
+                        <input type="number" step="any" name="Ws"
+                            placeholder="e.g. 18" required>
+                    </div>
+
+                    <div class="input-group">
+                        <label>Rainfall (Rain)</label>
+                        <input type="number" step="any" name="Rain"
+                            placeholder="e.g. 0.2" required>
+                    </div>
+
+                </div>
+
+                <div class="section-title">02 — Fire Weather Indicators</div>
+
+                <div class="form-grid">
+
+                    <div class="input-group">
+                        <label>Fine Fuel Moisture Code (FFMC)</label>
+                        <input type="number" step="any" name="FFMC"
+                            placeholder="Enter FFMC" required>
+                    </div>
+
+                    <div class="input-group">
+                        <label>Duff Moisture Code (DMC)</label>
+                        <input type="number" step="any" name="DMC"
+                            placeholder="Enter DMC" required>
+                    </div>
+
+                    <div class="input-group">
+                        <label>Initial Spread Index (ISI)</label>
+                        <input type="number" step="any" name="ISI"
+                            placeholder="Enter ISI" required>
+                    </div>
+
+                </div>
+
+                <div class="section-title">03 — Classification Parameters</div>
+
+                <div class="form-grid">
+
+                    <div class="input-group">
+                        <label>Fire Class</label>
+                        <input type="number" step="any" name="Classes"
+                            placeholder="Enter encoded class" required>
+                    </div>
+
+                    <div class="input-group">
+                        <label>Region</label>
+                        <input type="number" step="any" name="Region"
+                            placeholder="Enter region code" required>
+                    </div>
+
+                </div>
+
+                <button type="submit" class="submit-btn">
+                    GENERATE FWI PREDICTION &nbsp; →
+                </button>
+
+            </form>
+
+        </div>
+
+        {% if results is not none and results is defined %}
+
+        <div class="result">
+            <div class="result-label">Predicted Fire Weather Index</div>
+
+            <h2>{{ "%.2f"|format(results|float) }}</h2>
+
+            <p>Prediction generated successfully using the trained ML model.</p>
+        </div>
+
+        {% endif %}
+
+    </main>
+
+    <footer class="footer">
+        <div>POWERED BY <strong>PYTHON · FLASK · SCIKIT-LEARN</strong></div>
+        <div>WILDFIRE INTELLIGENCE SYSTEM</div>
+    </footer>
+
+</div>
+
+</body>
+</html>
